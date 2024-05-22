@@ -25,4 +25,16 @@ class MyPokemon extends Model
             ->get();
     }
 
+    public static function checkPokemon($userId, $pokemonId)
+    {
+        return DB::table('my_pokemons as a')
+            ->where('a.user_id', $userId)
+            ->where('a.pokemon_id', $pokemonId)
+            ->first();
+    }
+
+    public static function insertPokemon($params)
+    {
+        return DB::table('my_pokemons')->insert($params);
+    }
 }
