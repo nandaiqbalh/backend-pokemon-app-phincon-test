@@ -97,7 +97,7 @@ class MyPokemonController extends Controller
     public function releasePokemon()
     {
         // Generate a random number between 1 and 100
-        $randomNumber = rand(1, 100);
+        $randomNumber = rand(1, 10);
 
         return $this->successResponse('Release with number!', $randomNumber);
 
