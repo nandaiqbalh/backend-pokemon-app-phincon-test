@@ -47,4 +47,12 @@ class MyPokemon extends Model
             ->delete();
     }
 
+    public static function renamePokemon($userId, $pokemonId, $params)
+    {
+        return DB::table('my_pokemons')
+            ->where('user_id', $userId)
+            ->where('pokemon_id', $pokemonId)
+            ->update($params);
+    }
+
 }
