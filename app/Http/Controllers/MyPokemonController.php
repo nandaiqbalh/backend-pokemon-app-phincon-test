@@ -13,13 +13,13 @@ class MyPokemonController extends Controller
     {
 
         // Fetch user's pokemons
-        $my_pokemons = MyPokemon::getMyPokemons($request->user_id);
+        $myPokemons = MyPokemon::getMyPokemons($request->user_id);
 
-        if (is_null($my_pokemons) || $my_pokemons->isEmpty()) {
+        if ($myPokemons->isEmpty()) {
             return $this->failedResponse('No pokemons found for this user.');
         }
 
-        return $this->successResponse('Success to get my pokemons data.', $my_pokemons);
+        return $this->successResponse('Success to get my pokemons data.', $myPokemons);
     }
 
     public function catchPokemon(Request $request)

@@ -18,11 +18,12 @@ class MyPokemon extends Model
         'rename_flag',
     ];
 
-    public static function getMyPokemons($user_id)
+    public static function getMyPokemons($userId)
     {
-        return DB::table('my_pokemons as a')
-            ->where('a.user_id', $user_id)
-            ->get();
+        return DB::table('my_pokemons')
+            ->where('user_id', $userId)
+            ->orderBy('id', 'desc') // Sort by ID in descending order
+            ->paginate(20);
     }
 
     public static function checkPokemon($userId, $pokemonId)
