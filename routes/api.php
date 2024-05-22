@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\MyPokemonController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,8 +13,13 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "api" middleware group. Make something great!
 |
-*/
+ */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+
+    Route::post('/auth/login/', [UserController::class, 'login']);
+    Route::post('/auth/register/', [UserController::class, 'register']);
+
+    Route::get('/pokemon/my-pokemons/', [MyPokemonController::class, 'getMyPokemons']);
+
 });
