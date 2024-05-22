@@ -25,4 +25,7 @@ Route::prefix('v1')->group(function () {
 
     Route::post('/pokemon/my-pokemons/', [MyPokemonController::class, 'getMyPokemons']);
 
+    Route::post('/pokemon/release-pokemon/', [MyPokemonController::class, 'releasePokemon']);
+    Route::post('/pokemon/delete-pokemon/', [MyPokemonController::class, 'deletePokemon']);
+
 });

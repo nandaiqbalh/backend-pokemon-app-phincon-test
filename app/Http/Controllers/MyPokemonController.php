@@ -49,6 +49,50 @@ class MyPokemonController extends Controller
 
     }
 
+    public function releasePokemon()
+    {
+        // Generate a random number between 1 and 100
+        $randomNumber = rand(1, 100);
+
+        return $this->successResponse('Release with number!', $randomNumber);
+
+    }
+
+    public function deletePokemon(Request $request)
+    {
+        // Define validation rules
+        $rules = [
+            'user_id' => 'required|integer',
+            'pokemon_id' => 'required|integer',
+        ];
+
+        // Create a new validator instance
+        $validator = Validator::make($request->all(), $rules);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            // Retrieve the first error message
+            $firstErrorMessage = $validator->errors()->first();
+
+            // Return an error response with the first error message
+            return $this->failedResponse($firstErrorMessage);
+        }
+
+        $pokemonId = $request->pokemon_id;
+        $userId = $request->user_id;
+
+        // Delete the Pokémon record
+        $deleted = MyPokemon::deletePokemon($userId, $pokemonId);
+
+        if ($deleted) {
+            // If the record is successfully deleted
+            return $this->successResponse('Pokemon released successfully.', null);
+        } else {
+            // If the record was not found
+            return $this->failedResponse('Pokemon not found.');
+        }
+    }
+
     public function storePokemon(Request $request)
     {
         // Custom validation rules

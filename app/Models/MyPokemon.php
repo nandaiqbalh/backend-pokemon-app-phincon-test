@@ -38,4 +38,13 @@ class MyPokemon extends Model
     {
         return DB::table('my_pokemons')->insert($params);
     }
+
+    public static function deletePokemon($userId, $pokemonId)
+    {
+        return DB::table('my_pokemons')
+            ->where('user_id', $userId)
+            ->where('pokemon_id', $pokemonId)
+            ->delete();
+    }
+
 }
